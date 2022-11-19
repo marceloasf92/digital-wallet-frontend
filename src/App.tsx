@@ -1,9 +1,13 @@
 import { Routes } from "./routes";
+import { BrowserRouter } from "react-router-dom";
+import { AppThemeProvider } from "./contexts/";
 
 export const App = () => {
   return (
-    <>
-      <Routes />
-    </>
+    <AppThemeProvider>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </AppThemeProvider>
   );
 };
