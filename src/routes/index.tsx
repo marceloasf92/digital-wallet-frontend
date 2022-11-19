@@ -1,16 +1,14 @@
 import { Routes as RoutesDOM, Route, Navigate } from "react-router-dom";
-import { Button } from '@mui/material';
-import { useDrawerContext } from "../contexts";
-
-
+// import { Button } from "@mui/material";
+// import { useDrawerContext } from "../contexts";
+import { Dashboard } from "../pages";
 
 export const Routes = () => {
-
-  const { toggleDrawerOpen } = useDrawerContext();
+  // const { toggleDrawerOpen } = useDrawerContext();
 
   return (
     <RoutesDOM>
-      <Route path="/" element={<Button variant='contained' color='primary' onClick={toggleDrawerOpen}>Toggle drawer</Button>} />
+      <Route path="/" element={<Dashboard />} />
       <Route path="*" element={<Navigate to="/" />} />
     </RoutesDOM>
   );
