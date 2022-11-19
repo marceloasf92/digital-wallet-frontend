@@ -6,7 +6,7 @@ import {
   Icon,
   useMediaQuery,
 } from "@mui/material";
-import { useDrawerContext } from "../contexts";
+import { useAppThemeContext, useDrawerContext } from "../contexts";
 import { ReactNode } from "react";
 
 interface Props {
@@ -25,6 +25,8 @@ export const LayoutBase = ({
   const mdDown = useMediaQuery(theme.breakpoints.down("md"));
 
   const { toggleDrawerOpen } = useDrawerContext();
+
+  const { themeName, toggleTheme } = useAppThemeContext();
 
   return (
     <Box height="100%" display="flex" flexDirection="column" gap={1}>
@@ -47,6 +49,19 @@ export const LayoutBase = ({
         >
           {title}
         </Typography>
+        {themeName === "light" ? (
+          <Box flex={1} display="flex" justifyContent="flex-end">
+            <IconButton onClick={toggleTheme}>
+              <Icon>dark_mode</Icon>
+            </IconButton>
+          </Box>
+        ) : (
+          <Box flex={1} display="flex" justifyContent="flex-end">
+            <IconButton onClick={toggleTheme}>
+              <Icon color="action">light_mode</Icon>
+            </IconButton>
+          </Box>
+        )}
       </Box>
       {toolbar && <Box>{toolbar}</Box>}
       <Box flex={1} overflow="auto">
