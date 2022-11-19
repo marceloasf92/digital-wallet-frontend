@@ -1,13 +1,18 @@
 import { Routes } from "./routes";
 import { BrowserRouter } from "react-router-dom";
-import { AppThemeProvider } from "./contexts/";
+import { AppThemeProvider, DrawerProvider } from "./contexts/";
+import { SideMenu } from "./components/side-menu/SideMenu";
 
 export const App = () => {
   return (
     <AppThemeProvider>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
+      <DrawerProvider>
+        <BrowserRouter>
+          <SideMenu>
+            <Routes />
+          </SideMenu>
+        </BrowserRouter>
+      </DrawerProvider>
     </AppThemeProvider>
   );
 };
