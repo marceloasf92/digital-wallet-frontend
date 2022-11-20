@@ -20,6 +20,8 @@ export const LoginProvider = ({ children }: any) => {
 
   const [balance, setBalance] = useState(-1);
 
+  const [updatedat, setUpdatedat] = useState("");
+
   return (
     <LoginContext.Provider
       value={{
@@ -29,6 +31,8 @@ export const LoginProvider = ({ children }: any) => {
         setUserLogin,
         balance,
         setBalance,
+        updatedat,
+        setUpdatedat,
       }}
     >
       {children}

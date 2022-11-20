@@ -9,6 +9,7 @@ import {
 import { useAppThemeContext, useDrawerContext } from "../contexts";
 
 import { MdOutlineAlternateEmail } from "react-icons/md";
+import { useState } from "react";
 
 interface Props {
   children: React.ReactNode;
@@ -22,6 +23,10 @@ export const LayoutBase = ({ children }: Props): JSX.Element => {
   const { toggleDrawerOpen } = useDrawerContext();
 
   const { themeName, toggleTheme } = useAppThemeContext();
+
+  const [username] = useState(
+    localStorage.getItem("@user:digital_wallet") || "usuário"
+  );
 
   return (
     <Box height="100%" display="flex" flexDirection="column" gap={1}>
@@ -40,7 +45,7 @@ export const LayoutBase = ({ children }: Props): JSX.Element => {
         <Box>
           <Typography fontSize={theme.spacing(smDown ? 4 : 6)}>
             Olá, <MdOutlineAlternateEmail color="#7d2cff" />
-            Marcelo!
+            {username.replaceAll('"', "")}!
           </Typography>
         </Box>
         {themeName === "light" ? (

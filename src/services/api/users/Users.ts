@@ -51,7 +51,11 @@ const login = async (
   return response;
 };
 
-const showBalance = async (token: string, setBalance: any) => {
+const showBalance = async (
+  token: string,
+  setBalance: any,
+  setUpdatedat: any
+) => {
   const response = await Api.get<IBalance>("/account/me", {
     headers: { Authorization: `Bearer ${token}` },
   })
@@ -66,6 +70,7 @@ const showBalance = async (token: string, setBalance: any) => {
         JSON.stringify(str_hora)
       );
       setBalance(res.data.balance);
+      setUpdatedat(localStorage.getItem("@updateat:digital_wallet"));
     })
     .catch();
 

@@ -11,21 +11,20 @@ import CachedIcon from "@mui/icons-material/Cached";
 import { UsersService } from "../../services/api/users/Users";
 
 export const BoxBalance = () => {
-  const { balance, token, setBalance } = useLoginContext();
+  const { balance, token, setBalance, setUpdatedat, updatedat } =
+    useLoginContext();
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleClick = () => {
-    UsersService.showBalance(token, setBalance);
+    UsersService.showBalance(token, setBalance, setUpdatedat);
   };
-
-  console.log(balance);
 
   return (
     <Box height="100%" width="100%">
       <Box
         display="flex"
-        flexDirection="row"
+        flexDirection="column"
         justifyContent="center"
         alignItems="center"
         height="100%"
@@ -61,6 +60,11 @@ export const BoxBalance = () => {
             <IconButton aria-label="cached" onClick={handleClick}>
               <CachedIcon />
             </IconButton>
+          </Typography>
+        </Box>
+        <Box>
+          <Typography fontSize={theme.spacing(2)}>
+            Última atualização às {updatedat.replaceAll('"', "")}
           </Typography>
         </Box>
       </Box>
