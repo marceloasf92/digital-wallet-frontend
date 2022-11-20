@@ -1,25 +1,12 @@
 import { Box } from "@mui/system";
-import {
-  Typography,
-  useTheme,
-  IconButton,
-  Icon,
-  useMediaQuery,
-} from "@mui/material";
+import { useTheme, IconButton, Icon, useMediaQuery } from "@mui/material";
 import { useAppThemeContext, useDrawerContext } from "../contexts";
-import { ReactNode } from "react";
 
 interface Props {
   children: React.ReactNode;
-  title: string;
-  toolbar: ReactNode;
 }
 
-export const LayoutBase = ({
-  children,
-  title,
-  toolbar,
-}: Props): JSX.Element => {
+export const LayoutBase = ({ children }: Props): JSX.Element => {
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
   const mdDown = useMediaQuery(theme.breakpoints.down("md"));
@@ -41,14 +28,6 @@ export const LayoutBase = ({
             <Icon>menu</Icon>
           </IconButton>
         )}
-        <Typography
-          variant={smDown ? "h5" : mdDown ? "h4" : "h3"}
-          whiteSpace="nowrap"
-          overflow="hidden"
-          textOverflow="ellipsis"
-        >
-          {title}
-        </Typography>
         {themeName === "light" ? (
           <Box flex={1} display="flex" justifyContent="flex-end">
             <IconButton onClick={toggleTheme}>
@@ -63,7 +42,6 @@ export const LayoutBase = ({
           </Box>
         )}
       </Box>
-      {toolbar && <Box>{toolbar}</Box>}
       <Box flex={1} overflow="auto">
         {children}
       </Box>

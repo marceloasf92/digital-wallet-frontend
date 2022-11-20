@@ -13,6 +13,7 @@ import {
 import { Box } from "@mui/system";
 import { useNavigate, useResolvedPath, useMatch } from "react-router-dom";
 import { useDrawerContext } from "../../contexts";
+import ngLogo from "../../assets/ngLogo.png";
 
 interface IlistSideMenu {
   to: string;
@@ -72,7 +73,7 @@ export const SideMenu = ({ children }: BoxProps) => {
           >
             <Avatar
               sx={{ height: theme.spacing(12), width: theme.spacing(12) }}
-              src="/broken-image.jpg"
+              src={ngLogo}
             />
           </Box>
         </Box>
