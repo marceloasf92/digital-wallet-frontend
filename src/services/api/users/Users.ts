@@ -77,8 +77,14 @@ const showBalance = async (
   return response;
 };
 
+const handleLogout = (setToken: any) => {
+  localStorage.clear();
+  setToken("");
+};
+
 export const UsersService = {
   create,
   login,
   showBalance,
+  handleLogout,
 };

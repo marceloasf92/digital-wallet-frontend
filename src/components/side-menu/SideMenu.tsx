@@ -11,9 +11,14 @@ import {
   useMediaQuery,
 } from "@mui/material/";
 import { Box } from "@mui/system";
-import { useNavigate, useResolvedPath, useMatch } from "react-router-dom";
-import { useAppThemeContext, useDrawerContext } from "../../contexts";
+import { useNavigate } from "react-router-dom";
+import {
+  useAppThemeContext,
+  useDrawerContext,
+  useLoginContext,
+} from "../../contexts";
 import ngLogo from "../../assets/ngLogo.png";
+import { UsersService } from "../../services/api/users/Users";
 
 interface IlistSideMenu {
   to: string;
@@ -28,9 +33,8 @@ interface BoxProps {
 
 const ListSideMenu = ({ to, icon, label, onClick }: IlistSideMenu) => {
   const { themeName } = useAppThemeContext();
+
   const navigate = useNavigate();
-  // const resolvedPath = useResolvedPath(to);
-  // const match = useMatch({ path: resolvedPath.pathname, end: false });
 
   const handleClick = () => {
     navigate(to);
@@ -57,6 +61,14 @@ export const SideMenu = ({ children }: BoxProps) => {
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
+  const { setToken, token } = useLoginContext();
+
+  const handleClick = () => {
+    UsersService.handleLogout(setToken);
+    if (smDown) {
+      toggleDrawerOpen();
+    }
+  };
 
   return (
     <>
@@ -88,23 +100,36 @@ export const SideMenu = ({ children }: BoxProps) => {
         <Divider />
 
         <Box flex={1}>
-          <List component="nav" disablePadding={true}>
-            <ListSideMenu
-              icon="how_to_reg"
-              to="/"
-              label="Registre-se"
-              onClick={smDown ? toggleDrawerOpen : undefined}
-            />
-          </List>
-          <Divider />
-          <List component="nav">
-            <ListSideMenu
-              icon="login"
-              to="/login"
-              label="Login"
-              onClick={smDown ? toggleDrawerOpen : undefined}
-            />
-          </List>
+          {!token ? (
+            <>
+              <List component="nav" disablePadding={true}>
+                <ListSideMenu
+                  icon="how_to_reg"
+                  to="/"
+                  label="Registre-se"
+                  onClick={smDown ? toggleDrawerOpen : undefined}
+                />
+              </List>
+              <Divider />
+              <List component="nav">
+                <ListSideMenu
+                  icon="login"
+                  to="/login"
+                  label="Login"
+                  onClick={smDown ? toggleDrawerOpen : undefined}
+                />
+              </List>
+            </>
+          ) : (
+            <List component="nav">
+              <ListSideMenu
+                icon="logout"
+                to="/"
+                label="Logout"
+                onClick={handleClick}
+              />
+            </List>
+          )}
         </Box>
       </Drawer>
 
