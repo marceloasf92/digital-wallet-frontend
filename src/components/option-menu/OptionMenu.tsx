@@ -15,7 +15,8 @@ export const OptionMenu = ({ value, handleChange }: any): JSX.Element => {
         >
           <Tab value="balance" label="Saldo atual" />
           <Tab value="transfer" label="Transferência" />
-          <Tab value="transactions" label="Transações" />
+          <Tab value="transactionsSent" label="Transações Enviadas" />
+          <Tab value="transactionsReceived" label="Transações Recebidas" />
         </Tabs>
       </Box>
     </>

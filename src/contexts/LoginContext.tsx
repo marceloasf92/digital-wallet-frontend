@@ -20,6 +20,8 @@ export const LoginProvider = ({ children }: any) => {
 
   const [balance, setBalance] = useState(-1);
 
+  const [userDataLogged, setUserDataLogged] = useState([]);
+
   const [updatedat, setUpdatedat] = useState("");
 
   return (
@@ -33,6 +35,8 @@ export const LoginProvider = ({ children }: any) => {
         setBalance,
         updatedat,
         setUpdatedat,
+        userDataLogged,
+        setUserDataLogged,
       }}
     >
       {children}
