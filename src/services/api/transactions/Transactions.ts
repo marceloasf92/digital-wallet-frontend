@@ -17,6 +17,17 @@ const transfer = async (
   return response;
 };
 
+const searchTransactions = async (token: any, error: any): Promise<any> => {
+  const response = await Api.get<any>("/transaction/list", {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+    .then((_) => {})
+    .catch((err) => error(err.response.data));
+
+  return response;
+};
+
 export const TransactionsService = {
   transfer,
+  searchTransactions,
 };

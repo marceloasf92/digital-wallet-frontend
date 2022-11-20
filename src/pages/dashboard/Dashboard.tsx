@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BoxBalance } from "../../components/box-balance/BoxBalance";
 import { OptionMenu } from "../../components/option-menu/OptionMenu";
+import { TransactionsTable } from "../../components/transactions-table/TransactionsTable";
 import { TransferForm } from "../../components/transfer-form/TransferForm";
 import { LayoutBase } from "../../layouts";
 
@@ -19,7 +20,7 @@ export const Dashboard = (): JSX.Element => {
       ) : value === "transfer" ? (
         <TransferForm />
       ) : (
-        <TransferForm />
+        <TransactionsTable />
       )}
     </LayoutBase>
   );

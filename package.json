@@ -14,15 +14,20 @@
     "@hookform/resolvers": "^2.9.10",
     "@mui/icons-material": "^5.10.14",
     "@mui/material": "^5.10.14",
+    "@mui/x-data-grid": "^5.17.12",
+    "@mui/x-data-grid-pro": "^5.17.12",
     "@unform/core": "^2.1.6",
     "@unform/web": "^2.1.6",
     "axios": "^1.1.3",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.4",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-table": "^7.8.0",
     "react-toastify": "^9.1.1",
+    "reactstrap": "^9.1.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {
@@ -33,6 +38,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@types/react-table": "^7.7.12",
     "react-icons": "^4.6.0",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"

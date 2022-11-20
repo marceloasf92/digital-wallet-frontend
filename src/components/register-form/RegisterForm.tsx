@@ -87,7 +87,7 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
       .string()
       .required("Senha obrigatória")
       .matches(
-        /^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/,
+        /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z$*&@#]{8,}$/,
         "A senha deve ser composta por pelo menos 8 caracteres, um número e uma letra maiúscula"
       ),
   });
