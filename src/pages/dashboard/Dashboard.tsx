@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BoxBalance } from "../../components/box-balance/BoxBalance";
 import { OptionMenu } from "../../components/option-menu/OptionMenu";
+import { TransferForm } from "../../components/transfer-form/TransferForm";
 import { LayoutBase } from "../../layouts";
 
 export const Dashboard = (): JSX.Element => {
@@ -13,7 +14,13 @@ export const Dashboard = (): JSX.Element => {
   return (
     <LayoutBase>
       <OptionMenu value={value} handleChange={handleChange} />
-      {value === "balance" && <BoxBalance />}
+      {value === "balance" ? (
+        <BoxBalance />
+      ) : value === "transfer" ? (
+        <TransferForm />
+      ) : (
+        <TransferForm />
+      )}
     </LayoutBase>
   );
 };
