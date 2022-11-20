@@ -18,8 +18,19 @@ export const LoginProvider = ({ children }: any) => {
     localStorage.getItem("@token:digital_wallet") || ""
   );
 
+  const [balance, setBalance] = useState(-1);
+
   return (
-    <LoginContext.Provider value={{ token, setToken, userLogin, setUserLogin }}>
+    <LoginContext.Provider
+      value={{
+        token,
+        setToken,
+        userLogin,
+        setUserLogin,
+        balance,
+        setBalance,
+      }}
+    >
       {children}
     </LoginContext.Provider>
   );

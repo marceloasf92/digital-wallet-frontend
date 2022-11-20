@@ -14,6 +14,10 @@ interface IToken {
   token: string;
 }
 
+interface IBalance {
+  balance: string;
+}
+
 const create = async (
   userData: IUserData,
   success: any,
@@ -47,7 +51,29 @@ const login = async (
   return response;
 };
 
+const showBalance = async (token: string, setBalance: any) => {
+  const response = await Api.get<IBalance>("/account/me", {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+    .then((res) => {
+      let data = new Date();
+      let hora = data.getHours();
+      let min = data.getMinutes();
+      let seg = data.getSeconds();
+      let str_hora = hora + ":" + min + ":" + seg;
+      localStorage.setItem(
+        "@updateat:digital_wallet",
+        JSON.stringify(str_hora)
+      );
+      setBalance(res.data.balance);
+    })
+    .catch();
+
+  return response;
+};
+
 export const UsersService = {
   create,
   login,
+  showBalance,
 };

@@ -120,7 +120,6 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
       <Box
         border="1px solid"
         borderRadius="30px"
-        paddingX={8}
         paddingY={10}
         bgcolor={themeName === "dark" ? "#303134" : "#FFF"}
         boxShadow={
@@ -128,6 +127,8 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
             ? "0px 0px 5px 0px #FFFFFF"
             : "0px 0px 10px 0px #000000"
         }
+        margin={2}
+        width={smDown ? "80vw" : "40vw"}
       >
         <Box display="flex" flexDirection="column" gap={8}>
           <Typography
@@ -147,13 +148,15 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
           </Typography>
           <form
             onSubmit={handleSubmit(handleRegister)}
-            style={{ width: "100%" }}
+            style={{ display: "flex", justifyContent: "center" }}
           >
             <Box
               display="flex"
               alignItems="center"
               flexDirection="column"
+              justifyContent="center"
               gap={2}
+              width="80%"
             >
               <CssTextField
                 id="username"
@@ -166,7 +169,9 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
                 onChange={handleChange("username")}
                 type="text"
                 error={errors.username?.message === undefined ? false : true}
-                style={{ width: "100%" }}
+                style={{
+                  width: "100%",
+                }}
               />
               <CssTextField
                 id="password"

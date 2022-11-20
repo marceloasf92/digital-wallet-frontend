@@ -1,14 +1,19 @@
+import { useState } from "react";
+import { BoxBalance } from "../../components/box-balance/BoxBalance";
+import { OptionMenu } from "../../components/option-menu/OptionMenu";
 import { LayoutBase } from "../../layouts";
-import { RegisterForm } from "../../components/register-form/RegisterForm";
-import Diversity3Icon from "@mui/icons-material/Diversity3";
 
-export const Home = () => {
+export const Dashboard = (): JSX.Element => {
+  const [value, setValue] = useState("balance");
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
+
   return (
     <LayoutBase>
-      <RegisterForm
-        title="Bem-vindo"
-        icon={<Diversity3Icon fontSize="large" />}
-      />
+      <OptionMenu value={value} handleChange={handleChange} />
+      {value === "balance" && <BoxBalance />}
     </LayoutBase>
   );
 };

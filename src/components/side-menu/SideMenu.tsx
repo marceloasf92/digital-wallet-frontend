@@ -29,7 +29,7 @@ interface BoxProps {
 const ListSideMenu = ({ to, icon, label, onClick }: IlistSideMenu) => {
   const { themeName } = useAppThemeContext();
   const navigate = useNavigate();
-  const resolvedPath = useResolvedPath(to);
+  // const resolvedPath = useResolvedPath(to);
   // const match = useMatch({ path: resolvedPath.pathname, end: false });
 
   const handleClick = () => {

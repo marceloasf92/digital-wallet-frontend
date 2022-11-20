@@ -51,7 +51,7 @@ const CssTextField = styled(TextField)({
   },
 });
 
-export const LoginForm = ({ title, icon }: Props): JSX.Element => {
+export const LoginForm = ({ icon }: Props): JSX.Element => {
   const { themeName } = useAppThemeContext();
   const { setToken, setUserLogin } = useLoginContext();
   let navigate = useNavigate();
@@ -105,11 +105,7 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
     };
 
   const handleRegister = (data: UserSubmitForm) => {
-    try {
-      UsersService.login(data, setToken, setUserLogin, success, error);
-    } catch (err) {
-      console.log(err);
-    }
+    UsersService.login(data, setToken, setUserLogin, success, error);
   };
 
   return (
@@ -122,7 +118,6 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
       <Box
         border="1px solid"
         borderRadius="30px"
-        paddingX={8}
         paddingY={10}
         bgcolor={themeName === "dark" ? "#303134" : "#FFF"}
         boxShadow={
@@ -130,6 +125,7 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
             ? "0px 0px 5px 0px #FFFFFF"
             : "0px 0px 10px 0px #000000"
         }
+        minWidth="50%"
       >
         <Box display="flex" flexDirection="column" gap={8}>
           <Typography
@@ -149,13 +145,14 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
           </Typography>
           <form
             onSubmit={handleSubmit(handleRegister)}
-            style={{ width: "100%" }}
+            style={{ display: "flex", justifyContent: "center" }}
           >
             <Box
               display="flex"
               alignItems="center"
               flexDirection="column"
               gap={2}
+              width="80%"
             >
               <CssTextField
                 id="username"

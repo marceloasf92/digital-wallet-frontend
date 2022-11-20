@@ -1,6 +1,14 @@
 import { Box } from "@mui/system";
-import { useTheme, IconButton, Icon, useMediaQuery } from "@mui/material";
+import {
+  useTheme,
+  IconButton,
+  Icon,
+  useMediaQuery,
+  Typography,
+} from "@mui/material";
 import { useAppThemeContext, useDrawerContext } from "../contexts";
+
+import { MdOutlineAlternateEmail } from "react-icons/md";
 
 interface Props {
   children: React.ReactNode;
@@ -21,13 +29,20 @@ export const LayoutBase = ({ children }: Props): JSX.Element => {
         padding={1}
         display="flex"
         alignItems="center"
-        height={theme.spacing(smDown ? 6 : mdDown ? 8 : 12)}
+        justifyContent="center"
+        height={theme.spacing(smDown ? 4 : mdDown ? 6 : 6)}
       >
         {smDown && (
           <IconButton onClick={toggleDrawerOpen}>
             <Icon>menu</Icon>
           </IconButton>
         )}
+        <Box>
+          <Typography fontSize={theme.spacing(smDown ? 4 : 6)}>
+            Olá, <MdOutlineAlternateEmail color="#7d2cff" />
+            Marcelo!
+          </Typography>
+        </Box>
         {themeName === "light" ? (
           <Box flex={1} display="flex" justifyContent="flex-end">
             <IconButton onClick={toggleTheme}>
