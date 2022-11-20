@@ -1,6 +1,6 @@
 import { Routes } from "./routes";
 import { BrowserRouter } from "react-router-dom";
-import { AppThemeProvider, DrawerProvider } from "./contexts/";
+import { AppThemeProvider, DrawerProvider, LoginProvider } from "./contexts/";
 import { SideMenu } from "./components/side-menu/SideMenu";
 
 import { ToastContainer } from "react-toastify";
@@ -10,12 +10,14 @@ export const App = () => {
   return (
     <AppThemeProvider>
       <DrawerProvider>
-        <BrowserRouter>
-          <SideMenu>
-            <Routes />
-            <ToastContainer autoClose={3000} />
-          </SideMenu>
-        </BrowserRouter>
+        <LoginProvider>
+          <BrowserRouter>
+            <SideMenu>
+              <Routes />
+              <ToastContainer autoClose={3000} />
+            </SideMenu>
+          </BrowserRouter>
+        </LoginProvider>
       </DrawerProvider>
     </AppThemeProvider>
   );

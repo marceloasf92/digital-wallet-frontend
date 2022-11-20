@@ -1,14 +1,12 @@
 import { LayoutBase } from "../../layouts";
-import { RegisterForm } from "../../components/register-form/RegisterForm";
-import Diversity3Icon from "@mui/icons-material/Diversity3";
 
-export const Home = () => {
+import { LoginForm } from "../../components/login-form/LoginForm";
+import ParaglidingIcon from "@mui/icons-material/Paragliding";
+
+export const Login = () => {
   return (
     <LayoutBase>
-      <RegisterForm
-        title="Bem-vindo"
-        icon={<Diversity3Icon fontSize="large" />}
-      />
+      <LoginForm icon={<ParaglidingIcon fontSize="large" />} />
     </LayoutBase>
   );
 };

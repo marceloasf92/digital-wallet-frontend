@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import LoginIcon from "@mui/icons-material/Login";
 
 import { ReactNode, useState } from "react";
 
@@ -19,9 +19,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { UsersService } from "../../services/api/users/Users";
+import { useLoginContext } from "../../contexts";
 
 interface Props {
-  title: string;
+  title?: string;
   icon?: ReactNode;
 }
 
@@ -35,7 +36,8 @@ interface IError {
   message: string;
 }
 
-export const RegisterForm = ({ title, icon }: Props): JSX.Element => {
+export const LoginForm = ({ title, icon }: Props): JSX.Element => {
+  const { setToken, setUserLogin } = useLoginContext();
   let navigate = useNavigate();
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
@@ -87,7 +89,7 @@ export const RegisterForm = ({ title, icon }: Props): JSX.Element => {
 
   const handleRegister = (data: UserSubmitForm) => {
     try {
-      UsersService.create(data, success, error);
+      UsersService.login(data, setToken, setUserLogin, success, error);
     } catch (err) {
       console.log(err);
     }
@@ -156,7 +158,7 @@ export const RegisterForm = ({ title, icon }: Props): JSX.Element => {
               />
               <Button
                 variant="contained"
-                endIcon={<PersonAddIcon />}
+                endIcon={<LoginIcon />}
                 color="success"
                 type="submit"
                 style={{
@@ -165,7 +167,7 @@ export const RegisterForm = ({ title, icon }: Props): JSX.Element => {
                   fontSize: theme.spacing(2),
                 }}
               >
-                Registrar
+                Login
               </Button>
             </Box>
           </form>
