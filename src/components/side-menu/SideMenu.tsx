@@ -12,7 +12,7 @@ import {
 } from "@mui/material/";
 import { Box } from "@mui/system";
 import { useNavigate, useResolvedPath, useMatch } from "react-router-dom";
-import { useDrawerContext } from "../../contexts";
+import { useAppThemeContext, useDrawerContext } from "../../contexts";
 import ngLogo from "../../assets/ngLogo.png";
 
 interface IlistSideMenu {
@@ -27,16 +27,23 @@ interface BoxProps {
 }
 
 const ListSideMenu = ({ to, icon, label, onClick }: IlistSideMenu) => {
+  const { themeName } = useAppThemeContext();
   const navigate = useNavigate();
   const resolvedPath = useResolvedPath(to);
-  const match = useMatch({ path: resolvedPath.pathname, end: false });
+  // const match = useMatch({ path: resolvedPath.pathname, end: false });
 
   const handleClick = () => {
     navigate(to);
     onClick?.();
   };
   return (
-    <ListItemButton selected={!!match} onClick={handleClick}>
+    <ListItemButton
+      style={{
+        backgroundColor: themeName === "dark" ? "#202124" : "#f7f6f3",
+        padding: "20px",
+      }}
+      onClick={handleClick}
+    >
       <ListItemIcon>
         <Icon>{icon}</Icon>
       </ListItemIcon>
@@ -81,11 +88,20 @@ export const SideMenu = ({ children }: BoxProps) => {
         <Divider />
 
         <Box flex={1}>
+          <List component="nav" disablePadding={true}>
+            <ListSideMenu
+              icon="how_to_reg"
+              to="/"
+              label="Registre-se"
+              onClick={smDown ? toggleDrawerOpen : undefined}
+            />
+          </List>
+          <Divider />
           <List component="nav">
             <ListSideMenu
-              icon="home"
-              to="/"
-              label="Página inicial"
+              icon="login"
+              to="/login"
+              label="Login"
               onClick={smDown ? toggleDrawerOpen : undefined}
             />
           </List>

@@ -7,7 +7,7 @@ export const Home = () => {
     <LayoutBase>
       <RegisterForm
         title="Bem-vindo"
-        icon={<Diversity3Icon fontSize="large" />}
+        icon={<Diversity3Icon style={{ color: "#7d2cff", fontSize: "50px" }} />}
       />
     </LayoutBase>
   );

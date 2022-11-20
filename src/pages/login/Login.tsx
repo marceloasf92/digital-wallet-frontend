@@ -6,7 +6,11 @@ import ParaglidingIcon from "@mui/icons-material/Paragliding";
 export const Login = () => {
   return (
     <LayoutBase>
-      <LoginForm icon={<ParaglidingIcon fontSize="large" />} />
+      <LoginForm
+        icon={
+          <ParaglidingIcon style={{ color: "#7d2cff", fontSize: "50px" }} />
+        }
+      />
     </LayoutBase>
   );
 };

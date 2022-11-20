@@ -5,6 +5,7 @@ import {
   useMediaQuery,
   useTheme,
   TextField,
+  styled,
 } from "@mui/material";
 
 import LoginIcon from "@mui/icons-material/Login";
@@ -19,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { UsersService } from "../../services/api/users/Users";
-import { useLoginContext } from "../../contexts";
+import { useAppThemeContext, useLoginContext } from "../../contexts";
 
 interface Props {
   title?: string;
@@ -36,7 +37,22 @@ interface IError {
   message: string;
 }
 
+const CssTextField = styled(TextField)({
+  "& label.Mui-focused": {
+    color: "#7d2cff",
+  },
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "#7d2cff",
+  },
+  "& .MuiOutlinedInput-root": {
+    "&.Mui-focused fieldset": {
+      borderColor: "#7d2cff",
+    },
+  },
+});
+
 export const LoginForm = ({ title, icon }: Props): JSX.Element => {
+  const { themeName } = useAppThemeContext();
   const { setToken, setUserLogin } = useLoginContext();
   let navigate = useNavigate();
   const theme = useTheme();
@@ -48,7 +64,7 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
       username: "",
       password: "",
     });
-    toast.success("Conta criada com sucesso!");
+    toast.success("Seja bem-vindo!");
     navigate("/login");
   };
   const error = (errorMsg: IError) => {
@@ -62,9 +78,10 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
       return toast.error("Houve algum erro, tente mais tarde");
     }
   };
+  ///VALIDAR ERROS
 
   const schema = yup.object().shape({
-    username: yup.string().required("Username obrigatório"),
+    username: yup.string().required("Usuário obrigatório"),
     password: yup.string().required("Senha obrigatória"),
   });
 
@@ -102,8 +119,19 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
       alignItems="center"
       justifyContent="center"
     >
-      <Box border="1px solid" borderRadius="30px" paddingX={5} paddingY={12}>
-        <Box display="flex" flexDirection="column" gap={2}>
+      <Box
+        border="1px solid"
+        borderRadius="30px"
+        paddingX={8}
+        paddingY={10}
+        bgcolor={themeName === "dark" ? "#303134" : "#FFF"}
+        boxShadow={
+          themeName === "dark"
+            ? "0px 0px 5px 0px #FFFFFF"
+            : "0px 0px 10px 0px #000000"
+        }
+      >
+        <Box display="flex" flexDirection="column" gap={8}>
           <Typography
             variant={smDown ? "h5" : mdDown ? "h4" : "h3"}
             whiteSpace="nowrap"
@@ -116,7 +144,6 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
               gap={1}
               justifyContent="center"
             >
-              {title}
               {icon}
             </Box>
           </Typography>
@@ -130,9 +157,9 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
               flexDirection="column"
               gap={2}
             >
-              <TextField
+              <CssTextField
                 id="username"
-                label="Username"
+                label="Usuário"
                 helperText={errors.username?.message}
                 variant="outlined"
                 {...register("username")}
@@ -143,9 +170,9 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
                 error={errors.username?.message === undefined ? false : true}
                 style={{ width: "100%" }}
               />
-              <TextField
+              <CssTextField
                 id="password"
-                label="Password"
+                label="Senha"
                 helperText={errors.password?.message}
                 variant="outlined"
                 {...register("password")}
@@ -159,12 +186,13 @@ export const LoginForm = ({ title, icon }: Props): JSX.Element => {
               <Button
                 variant="contained"
                 endIcon={<LoginIcon />}
-                color="success"
                 type="submit"
                 style={{
                   width: "100%",
                   height: theme.spacing(8),
                   fontSize: theme.spacing(2),
+                  backgroundColor: themeName === "dark" ? "#FFF" : "#000000",
+                  color: themeName === "dark" ? "#303134" : "#FFF",
                 }}
               >
                 Login
