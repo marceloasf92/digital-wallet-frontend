@@ -71,7 +71,7 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
     });
     if (errorMsg.message === "You are not allowed to transfer to yourself.") {
       return toast.error(
-        "Você não tem permissão para transferir para si mesmo."
+        "Não é possível realizar a transferência para a conta de origem."
       );
     } else if (errorMsg.message === "Username doesn't exist.") {
       return toast.error("Usuário não encontrado");
@@ -84,9 +84,9 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
     username: yup.string().required("Usuário obrigatório"),
     cashOut: yup
       .number()
-      .positive("Deve ser maior do que zero.")
+      .positive("Informe um valor positivo")
       .required("Número obrigatória")
-      .typeError("Favor informe um número."),
+      .typeError("Favor informe um valor."),
   });
 
   const {
@@ -180,7 +180,7 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
                 name="cashOut"
                 value={values.cashOut}
                 onChange={handleChange("cashOut")}
-                type="cashOut"
+                type="number"
                 error={errors.cashOut?.message === undefined ? false : true}
                 style={{ width: "100%" }}
               />

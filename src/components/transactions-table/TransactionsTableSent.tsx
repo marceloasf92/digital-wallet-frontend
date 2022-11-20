@@ -16,8 +16,16 @@ export const TransactionsTableSent = () => {
   const columns = useMemo(
     () => [
       {
-        field: "debitedAccountId",
+        field: "debitedAccount",
+        valueGetter: (params) => {
+          return `@${params.row?.debitedAccount.user.username}`;
+        },
         headerName: "Enviado para:",
+        width: 200,
+      },
+      {
+        field: "debitedAccountId",
+        headerName: "Conta:",
         width: 200,
       },
       { field: "value", headerName: "Valor da transação", width: 200 },
@@ -35,6 +43,7 @@ export const TransactionsTableSent = () => {
 
   const handleUpdate = () => {
     TransactionsService.searchTransactions(token, setUserDataLogged);
+    console.log(userDataLogged);
   };
   return (
     <Box

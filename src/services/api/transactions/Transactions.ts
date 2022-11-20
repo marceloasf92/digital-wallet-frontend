@@ -20,13 +20,11 @@ const transfer = async (
 const searchTransactions = async (
   token: any,
   setUserDataLogged: any
-): Promise<any> => {
+): Promise<void> => {
   const response = await Api.get<any>("/transaction/list", {
     headers: { Authorization: `Bearer ${token}` },
   })
     .then((res) => {
-      console.log(res.data.transactions);
-
       setUserDataLogged(res.data.transactions);
     })
     .catch((_) => {});

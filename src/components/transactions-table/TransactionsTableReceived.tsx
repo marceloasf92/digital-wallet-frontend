@@ -16,6 +16,14 @@ export const TransactionsTableReceived = () => {
   const columns = useMemo(
     () => [
       {
+        field: "creditedAccount",
+        valueGetter: (params) => {
+          return `@${params.row?.creditedAccount.user.username}`;
+        },
+        headerName: "Recebido de:",
+        width: 200,
+      },
+      {
         field: "creditedAccountId",
         headerName: "Recebido de:",
         width: 200,
@@ -35,6 +43,7 @@ export const TransactionsTableReceived = () => {
 
   const handleUpdate = () => {
     TransactionsService.searchTransactions(token, setUserDataLogged);
+    console.log(userDataLogged);
   };
   return (
     <Box
