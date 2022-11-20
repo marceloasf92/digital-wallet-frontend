@@ -81,8 +81,12 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
   };
 
   const schema = yup.object().shape({
-    username: yup.string().required("Usuário obrigatório").min(3),
-    cashOut: yup.number().required("Número obrigatória"),
+    username: yup.string().required("Usuário obrigatório"),
+    cashOut: yup
+      .number()
+      .positive("Deve ser maior do que zero.")
+      .required("Número obrigatória")
+      .typeError("Favor informe um número."),
   });
 
   const {
@@ -107,7 +111,6 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
   const handleTransfer = (data: UserSubmitForm) => {
     TransactionsService.transfer(data, token, success, error);
   };
-  console.log(values);
 
   return (
     <Box

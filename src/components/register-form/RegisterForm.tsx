@@ -79,8 +79,17 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
   };
 
   const schema = yup.object().shape({
-    username: yup.string().required("Username obrigatório"),
-    password: yup.string().required("Senha obrigatória"),
+    username: yup
+      .string()
+      .required("Usuário obrigatório")
+      .min(3, "Usuário deve conter pelo menos 3 caracteres"),
+    password: yup
+      .string()
+      .required("Senha obrigatória")
+      .matches(
+        /^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/,
+        "A senha deve ser composta por pelo menos 8 caracteres, um número e uma letra maiúscula"
+      ),
   });
 
   const {
