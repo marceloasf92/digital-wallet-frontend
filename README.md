@@ -11,7 +11,6 @@ Aplicação tem por objetivo realizar transferências entre usuários. Podendo v
 # Techs:
 
 - ReactJS
--
 - ConxtexAPI
 - Axios
 - Router dom
