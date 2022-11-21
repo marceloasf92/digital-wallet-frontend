@@ -34,7 +34,9 @@ interface Props {
 type UserSubmitForm = {
   username: string;
   password: string;
+  confirmPassword: "";
   showPassword: boolean;
+  showConfirmPassword: boolean;
 };
 
 interface IError {
@@ -67,7 +69,9 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
     setValues({
       username: "",
       password: "",
+      confirmPassword: "",
       showPassword: false,
+      showConfirmPassword: false,
     });
     toast.success("Conta criada com sucesso!");
     navigate("/login");
@@ -76,7 +80,9 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
     setValues({
       username: "",
       password: "",
+      confirmPassword: "",
       showPassword: false,
+      showConfirmPassword: false,
     });
     if (errorMsg.message === "Wrong email/password") {
       return toast.error("Favor tente novamente, usuário ou senha errados.");
@@ -97,6 +103,10 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
         /^(?=.*\d)(?=.*[A-Z])[0-9a-zA-Z$*&@#]{8,}$/,
         "A senha deve ser composta por pelo menos 8 caracteres, um número e uma letra maiúscula"
       ),
+    confirmPassword: yup
+      .string()
+      .required("Confirmação obrigatória")
+      .oneOf([yup.ref("password"), null], "Senhas diferentes"),
   });
 
   const {
@@ -110,7 +120,9 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
   const [values, setValues] = useState<UserSubmitForm>({
     username: "",
     password: "",
+    confirmPassword: "",
     showPassword: false,
+    showConfirmPassword: false,
   });
 
   const handleChange =
@@ -123,17 +135,21 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
     UsersService.create(data, success, error);
   };
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
-  const handleMouseDownPassword = (
+  const handleClickShowPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
+    if (event.currentTarget.id === "confirmPassword") {
+      setValues({
+        ...values,
+        showConfirmPassword: !values.showConfirmPassword,
+      });
+    } else {
+      setValues({
+        ...values,
+        showPassword: !values.showPassword,
+      });
+    }
   };
 
   return (
@@ -214,11 +230,39 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="start">
-                      <IconButton
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
+                      <IconButton onClick={handleClickShowPassword}>
                         {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <CssTextField
+                id="confirmPassword"
+                label="Confirme sua senha aqui"
+                helperText={errors.confirmPassword?.message}
+                variant="outlined"
+                {...register("confirmPassword")}
+                name="confirmPassword"
+                value={values.confirmPassword}
+                onChange={handleChange("confirmPassword")}
+                type={!values.showConfirmPassword ? "password" : "text"}
+                error={
+                  errors.confirmPassword?.message === undefined ? false : true
+                }
+                style={{ width: "100%" }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton
+                        id="confirmPassword"
+                        onClick={handleClickShowPassword}
+                      >
+                        {values.showConfirmPassword ? (
                           <VisibilityOff />
                         ) : (
                           <Visibility />
