@@ -6,8 +6,12 @@ import {
   useTheme,
   TextField,
   styled,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 import { ReactNode, useState } from "react";
@@ -30,6 +34,7 @@ interface Props {
 type UserSubmitForm = {
   username: string;
   password: string;
+  showPassword: boolean;
 };
 
 interface IError {
@@ -62,6 +67,7 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
     setValues({
       username: "",
       password: "",
+      showPassword: false,
     });
     toast.success("Conta criada com sucesso!");
     navigate("/login");
@@ -70,6 +76,7 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
     setValues({
       username: "",
       password: "",
+      showPassword: false,
     });
     if (errorMsg.message === "Username already exists!") {
       return toast.error("Usuário ou senha já cadastrados.");
@@ -103,6 +110,7 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
   const [values, setValues] = useState<UserSubmitForm>({
     username: "",
     password: "",
+    showPassword: false,
   });
 
   const handleChange =
@@ -112,11 +120,20 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
     };
 
   const handleRegister = (data: UserSubmitForm) => {
-    try {
-      UsersService.create(data, success, error);
-    } catch (err) {
-      console.log(err);
-    }
+    UsersService.create(data, success, error);
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
   };
 
   return (
@@ -191,9 +208,25 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
                 name="password"
                 value={values.password}
                 onChange={handleChange("password")}
-                type="password"
+                type={!values.showPassword ? "password" : "text"}
                 error={errors.password?.message === undefined ? false : true}
                 style={{ width: "100%" }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               <Button
                 variant="contained"
