@@ -1,8 +1,7 @@
 # Digital Wallet
 
 <a href="https://digital-wallet-frontend.vercel.app/" alt="linkSite">
-
-![Link na web](https://img.shields.io/badge/web-0A66C2?style=for-the-badge&logo=web&logoColor=white)
+Link
 </a>
 
 <p>
@@ -12,7 +11,7 @@ Aplicação tem por objetivo realizar transferências entre usuários. Podendo v
 # Techs:
 
 - ReactJS
-- Typescript
+-
 - ConxtexAPI
 - Axios
 - Router dom
