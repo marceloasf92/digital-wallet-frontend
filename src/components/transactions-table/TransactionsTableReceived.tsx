@@ -51,7 +51,6 @@ export const TransactionsTableReceived = () => {
 
   const handleUpdate = () => {
     TransactionsService.searchTransactions(token, setUserDataLogged);
-    console.log(userDataLogged);
   };
   return (
     <Box
