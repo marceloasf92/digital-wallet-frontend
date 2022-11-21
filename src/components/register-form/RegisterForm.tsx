@@ -78,8 +78,8 @@ export const RegisterForm = ({ icon }: Props): JSX.Element => {
       password: "",
       showPassword: false,
     });
-    if (errorMsg.message === "Username already exists!") {
-      return toast.error("Usuário ou senha já cadastrados.");
+    if (errorMsg.message === "Wrong email/password") {
+      return toast.error("Favor tente novamente, usuário ou senha errados.");
     } else {
       return toast.error("Houve algum erro, tente mais tarde");
     }

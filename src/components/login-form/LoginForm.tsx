@@ -85,7 +85,6 @@ export const LoginForm = ({ icon }: Props): JSX.Element => {
       return toast.error("Houve algum erro, tente mais tarde");
     }
   };
-  ///VALIDAR ERROS
 
   const schema = yup.object().shape({
     username: yup.string().required("Usuário obrigatório"),
@@ -106,8 +105,6 @@ export const LoginForm = ({ icon }: Props): JSX.Element => {
     showPassword: false,
   });
 
-  console.log(values);
-
   const handleChange =
     (prop: keyof UserSubmitForm) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,8 +112,6 @@ export const LoginForm = ({ icon }: Props): JSX.Element => {
     };
 
   const handleRegister = (data: UserSubmitForm) => {
-    console.log(data);
-
     UsersService.login(data, setToken, setUserLogin, success, error);
   };
 
