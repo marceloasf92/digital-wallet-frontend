@@ -125,7 +125,8 @@ export const LoginForm = ({ icon }: Props): JSX.Element => {
             ? "0px 0px 5px 0px #FFFFFF"
             : "0px 0px 10px 0px #000000"
         }
-        minWidth="50%"
+        margin={2}
+        width={smDown ? "80vw" : "40vw"}
       >
         <Box display="flex" flexDirection="column" gap={8}>
           <Typography

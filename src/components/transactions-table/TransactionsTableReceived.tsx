@@ -17,7 +17,7 @@ export const TransactionsTableReceived = () => {
     () => [
       {
         field: "creditedAccount",
-        valueGetter: (params) => {
+        valueGetter: (params: any) => {
           return `@${params.row?.creditedAccount.user.username}`;
         },
         headerName: "Recebido de:",
@@ -25,15 +25,23 @@ export const TransactionsTableReceived = () => {
       },
       {
         field: "creditedAccountId",
-        headerName: "Recebido de:",
+        headerName: "Número da conta:",
         width: 200,
       },
-      { field: "value", headerName: "Valor da transação", width: 200 },
+      {
+        field: "value",
+        valueGetter: (params: any) => {
+          let realValue = params.row?.value;
+          return `R$ ${Number(realValue).toFixed(2)}`;
+        },
+        headerName: "Valor da transação",
+        width: 200,
+      },
       {
         field: "createdAt",
         headerName: "Data da transação",
         width: 200,
-        renderCell: (params) =>
+        renderCell: (params: any) =>
           moment(params.row.createdAt).format("YYYY-MM-DD HH:MM:SS"),
       },
     ],

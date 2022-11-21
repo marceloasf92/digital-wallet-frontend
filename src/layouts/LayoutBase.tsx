@@ -6,9 +6,12 @@ import {
   useMediaQuery,
   Typography,
 } from "@mui/material";
-import { useAppThemeContext, useDrawerContext } from "../contexts";
+import {
+  useAppThemeContext,
+  useDrawerContext,
+  useLoginContext,
+} from "../contexts";
 
-import { MdOutlineAlternateEmail } from "react-icons/md";
 import { useState } from "react";
 
 interface Props {
@@ -23,6 +26,8 @@ export const LayoutBase = ({ children }: Props): JSX.Element => {
   const { toggleDrawerOpen } = useDrawerContext();
 
   const { themeName, toggleTheme } = useAppThemeContext();
+
+  const { token } = useLoginContext();
 
   const [username] = useState(
     localStorage.getItem("@user:digital_wallet") || "usuário"
@@ -42,12 +47,17 @@ export const LayoutBase = ({ children }: Props): JSX.Element => {
             <Icon>menu</Icon>
           </IconButton>
         )}
-        <Box>
-          <Typography fontSize={theme.spacing(smDown ? 4 : 6)}>
-            Olá, <MdOutlineAlternateEmail color="#7d2cff" />
-            {username.replaceAll('"', "")}!
-          </Typography>
-        </Box>
+        {token && (
+          <Box>
+            <Typography
+              fontSize={theme.spacing(smDown ? 3 : 5)}
+              color="#7d2cff"
+              margin={2}
+            >
+              Olá, {username.replaceAll('"', "").toUpperCase()}
+            </Typography>
+          </Box>
+        )}
         {themeName === "light" ? (
           <Box flex={1} display="flex" justifyContent="flex-end">
             <IconButton onClick={toggleTheme}>

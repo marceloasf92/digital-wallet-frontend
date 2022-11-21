@@ -61,11 +61,12 @@ export const SideMenu = ({ children }: BoxProps) => {
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
-  const { setToken, token, setBalance } = useLoginContext();
+  const { setToken, token, setBalance, setUserDataLogged } = useLoginContext();
 
   const handleClick = () => {
     UsersService.handleLogout(setToken);
     setBalance(-1);
+    setUserDataLogged([]);
     if (smDown) {
       toggleDrawerOpen();
     }

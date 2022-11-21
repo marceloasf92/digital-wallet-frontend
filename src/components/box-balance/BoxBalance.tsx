@@ -33,7 +33,7 @@ export const BoxBalance = () => {
           borderRadius="30px"
           border="1px solid"
           padding="25px"
-          width="50%"
+          width="80%"
           margin={2}
         >
           <Typography
@@ -52,19 +52,22 @@ export const BoxBalance = () => {
                 <Skeleton
                   variant="rounded"
                   width={100}
-                  height={60}
-                  style={{ flex: 1 }}
+                  height={100}
+                  style={{ flex: 1, fontSize: theme.spacing(smDown ? 4 : 6) }}
                 />
               </>
             )}
-            <IconButton aria-label="cached" onClick={handleClick}>
-              <CachedIcon />
+            <IconButton aria-label="cached" onClick={handleClick} size="large">
+              <CachedIcon
+                style={{ flex: 1, fontSize: theme.spacing(smDown ? 4 : 6) }}
+              />
             </IconButton>
           </Typography>
         </Box>
         <Box>
           <Typography fontSize={theme.spacing(2)}>
-            Última atualização às {updatedat.replaceAll('"', "")}
+            Última atualização às{" "}
+            {updatedat ? updatedat.replaceAll('"', "") : "-"}
           </Typography>
         </Box>
       </Box>

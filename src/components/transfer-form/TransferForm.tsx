@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 
 import PaidIcon from "@mui/icons-material/Paid";
+import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStation";
 
 import { ReactNode, useState } from "react";
 
@@ -116,8 +117,9 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
     <Box
       height="100%"
       display="flex"
-      alignItems="center"
+      alignItems="flex-start"
       justifyContent="center"
+      marginTop={3}
     >
       <Box
         border="1px solid"
@@ -129,7 +131,8 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
             ? "0px 0px 5px 0px #FFFFFF"
             : "0px 0px 10px 0px #000000"
         }
-        minWidth="50%"
+        margin={2}
+        width={smDown ? "80vw" : "40vw"}
       >
         <Box display="flex" flexDirection="column" gap={8}>
           <Typography
@@ -138,13 +141,10 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
             overflow="hidden"
             textOverflow="ellipsis"
           >
-            <Box
-              display="flex"
-              alignItems="center"
-              gap={1}
-              justifyContent="center"
-            >
-              {icon}
+            <Box display="flex" alignItems="center" justifyContent="center">
+              <TransferWithinAStationIcon
+                style={{ color: "#7d2cff", fontSize: "50px" }}
+              />
             </Box>
           </Typography>
           <form
@@ -169,7 +169,9 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
                 onChange={handleChange("username")}
                 type="text"
                 error={errors.username?.message === undefined ? false : true}
-                style={{ width: "100%" }}
+                style={{
+                  width: "100%",
+                }}
               />
               <CssTextField
                 id="cashOut"
@@ -182,7 +184,10 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
                 onChange={handleChange("cashOut")}
                 type="number"
                 error={errors.cashOut?.message === undefined ? false : true}
-                style={{ width: "100%" }}
+                style={{
+                  width: "100%",
+                  fontSize: theme.spacing(smDown ? 2 : 3),
+                }}
               />
               <Button
                 variant="contained"
@@ -191,7 +196,7 @@ export const TransferForm = ({ icon }: Props): JSX.Element => {
                 style={{
                   width: "100%",
                   height: theme.spacing(8),
-                  fontSize: theme.spacing(2),
+                  fontSize: theme.spacing(smDown ? 2 : 3),
                   backgroundColor: themeName === "dark" ? "#FFF" : "#000000",
                   color: themeName === "dark" ? "#303134" : "#FFF",
                 }}
